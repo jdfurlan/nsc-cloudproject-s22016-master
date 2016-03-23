@@ -1,0 +1,23 @@
+These are instructions on how exactly the image file should be sent over to the server so we can upload into blob storage.
+This should be sufficient for the Web UI team since it's in JS.
+
+# To upload files to blob storage, the request method must be "POST"
+# and enctype must be set to "multipart/form-data".
+self.response.out.write("""
+	<html><body>
+	<form action="{0}" method="POST" enctype="multipart/form-data">
+ 	 Upload File: <input type="file" name="file"><br>
+ 	 <input type="submit" name="submit" value="Submit">
+	</form>
+	</body></html>""".format(upload_url)
+)
+
+
+For Android, you can do it in only 4 lines
+
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'upload/binary/jpeg', true);
+xhr.setRequestHeader('Content-Type', 'image/jpeg');
+xhr.send(blob);
+
+The full instructions are found here https://ghinda.net/article/jpeg-blob-ajax-android/
